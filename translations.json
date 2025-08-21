@@ -1,10 +1,12 @@
 {
     "en": {
         "ai": "AI",
-        "doSomethingWith": "do something with"
+        "doSomethingWith": "do something with",
+        "whatCanIDoForYou": "What can AI do for you?"
     },
     "nl": {
         "ai": "AI",
-        "doSomethingWith": "doe iets met"
+        "doSomethingWith": "doe iets met",
+        "whatCanIDoForYou": "Wat kan AI voor je doen?"
     }
 }
