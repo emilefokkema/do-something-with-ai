@@ -1,9 +1,16 @@
 .container {
     display: flex;
     flex-direction: row-reverse;
-    padding: .5rem;
 }
 
-p {
+.balloon {
+    max-width: 75%;
+    background-color: #dcd1ed;
+    border-radius: 1.5rem;
+    padding: 1rem;
+}
+
+#content-container {
     margin: 0;
+    color: #5b417c;
 }

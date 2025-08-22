@@ -24,8 +24,13 @@ class MessageList extends HTMLElement {
         this.empty = false;
     }
 
-    addReceivedAiMessage(){
+    /**
+     * 
+     * @param {import('./ai-message.js').AiMessage} aiMessage 
+     */
+    addReceivedAiMessage(aiMessage){
         const messageElement = document.createElement('received-ai-message');
+        messageElement.setMessage(aiMessage);
         this.addMessage(messageElement)
     }
 

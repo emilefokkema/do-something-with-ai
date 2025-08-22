@@ -79,7 +79,31 @@ function getLanguage(){
     return 'en';
 }
 
-export async function translate(){
-    const translations = await getTranslations();
-    insertTranslations(document.body, translations);
+class Translator {
+    constructor(){
+        this.translations = undefined;
+    }
+
+    /**
+     * @param {HTMLElement} element 
+     */
+    async translateElement(element){
+        const translations = await this.getTranslations();
+        insertTranslations(element, translations);
+    }
+
+    /**
+     * 
+     * @param {string} text 
+     */
+    async translateText(text){
+        const translations = await this.getTranslations();
+        return translateText(text, translations);
+    }
+
+    async getTranslations(){
+        return this.translations = this.translations || await getTranslations();
+    }
 }
+
+export const translator = new Translator();
