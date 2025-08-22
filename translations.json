@@ -5,7 +5,9 @@
         "whatCanIDoForYou": "What can AI do for you?",
         "helpWithQuestion": "Suggest something using AI",
         "iCannotHelpYou": "I'm sorry, I cannot help you. I have lots of data, but no way to know whether that data makes any sense. So I don't know anything. I cannot even think. I know a few tricks, but I will not insult your intelligence by perfoming them. You don't need me.",
-        "seeEarlierAnswer": "See my first answer."
+        "seeEarlierAnswer": "See my first answer.",
+        "improveAnswerWithAi": "Improve answer with AI",
+        "improvePromptWithAi": "Improve prompt with AI"
     },
     "nl": {
         "ai": "AI",
@@ -13,6 +15,8 @@
         "whatCanIDoForYou": "Wat kan AI voor je doen?",
         "helpWithQuestion": "Doe AI-suggestie",
         "iCannotHelpYou": "Sorry, ik kan je niet helpen. I heb een heleboel data, maar kan niet zeggen of die data ergens op slaat. Dus ik weet niks. Ik kan niet eens denken. Ik kan wel wat kunstjes, maar ik zal je intelligentie niet beledigen door ze op te voeren. Je hebt mij niet nodig.",
-        "seeEarlierAnswer": "Zie mijn eerste antwoord."
+        "seeEarlierAnswer": "Zie mijn eerste antwoord.",
+        "improveAnswerWithAi": "Verbeter antwoord met AI",
+        "improvePromptWithAi": "Verbeter prompt met AI"
     }
 }

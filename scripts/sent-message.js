@@ -6,7 +6,11 @@ class SentMessage extends HTMLElement {
         shadow.appendChild(content);
         const message = this.getAttribute('content');
         const container = shadow.querySelector('#container');
-        container.innerText = message;
+        const contentContainer = shadow.querySelector('#content-container');
+        contentContainer.innerText = message;
+        const button = document.createElement('ai-button');
+        button.setAttribute('text', 'improvePromptWithAi');
+        container.appendChild(button);
     }
 }
 

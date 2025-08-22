@@ -26,6 +26,7 @@ export class AiMessage {
         this.finalContent = finalContent;
         this.content = '';
         this.loading = false;
+        this.complete = false;
         this.emitter = new EventTarget();
     }
 
@@ -38,6 +39,7 @@ export class AiMessage {
             this.emitContentUpdated();
         }
         this.loading = false;
+        this.complete = true;
         this.emitContentUpdated();
     }
 

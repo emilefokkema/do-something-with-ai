@@ -14,9 +14,7 @@
             </div>
             
             <div class="toolbar">
-                <button id="help-question-button">
-                    <span class="button-text" data-translation-text="✨ {{helpWithQuestion}}"></span>
-                </button>
+                <ai-button text="helpWithQuestion"></ai-button>
             </div>
             <div class="magic-input-wrapper">
                 <textarea 
@@ -37,7 +35,7 @@
         <template id="received-ai-message-template">
             <link rel="stylesheet" href="received-ai-message.css"/>
             <div class="container">
-                <div class="balloon">
+                <div id="balloon">
                     <p id="content-container"></p>
                 </div>
                 
@@ -46,8 +44,14 @@
         <template id="sent-message-template">
             <link rel="stylesheet" href="sent-message.css"/>
             <div id="container">
-                <p>hello</p>
+                <div id="content-container"></div>
             </div>
+        </template>
+        <template id="ai-button-template">
+            <link rel="stylesheet" href="ai-button.css"/>
+            <button>
+                <span id="button-text"></span>
+            </button>
         </template>
     </body>
 </html>

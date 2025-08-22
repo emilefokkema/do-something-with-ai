@@ -69,14 +69,7 @@ body > .content {
     background-color: #fff;
     background-clip: text;
 }
-#help-question-button {
-    background-image: var(--gradient);
-    color: #fff;
-    border: none;
-    padding: .5rem;
-    border-radius: 1.5rem;
-    cursor: pointer;
-}
+
 
 #send-button {
     position: absolute;

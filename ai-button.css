@@ -1,0 +1,14 @@
+button {
+    background-image: var(--gradient);
+    color: #fff;
+    border: none;
+    padding: .5rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
+}
+
+#button-text {
+    color: transparent;
+    background-color: #fff;
+    background-clip: text;
+}

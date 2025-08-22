@@ -15,9 +15,15 @@ class ReceivedAiMessage extends HTMLElement {
 
     setMessageContent(){
         const container = this.shadow.querySelector('#content-container');
+        const balloon = this.shadow.querySelector('#balloon')
         container.innerText = this.aiMessage.content;
         if(this.aiMessage.loading){
             container.appendChild(document.createTextNode('...'))
+        }
+        if(this.aiMessage.complete){
+            const button = document.createElement('ai-button');
+            button.setAttribute('text', 'improveAnswerWithAi');
+            balloon.appendChild(button);
         }
     }
 
