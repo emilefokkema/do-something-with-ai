@@ -1,14 +1,14 @@
 :root {
     font-family: sans-serif;
+    font-size: 16px;
     --mauve: #9d82c0;
-    --pink: #f282b3;
+    --pink: #f28291;
     --gradient: linear-gradient(90deg, var(--mauve) 0%, var(--pink) 100%);
     --magic-input-border-width: 2px;
-    --magic-input-border-radius: 1.5rem;
+    --magic-input-border-radius: 2.5rem;
 }
 
 body {
-    background-color: #ede9f7;
     margin: 0;
     padding: 0;
     display: flex;
@@ -40,19 +40,26 @@ body > .content {
     width: 100%;
     display: flex;
     flex-direction: row;
+    position: relative;
 }
 
-.magic-input {
+#magic-input {
     border-width: 0;
     border-radius: var(--magic-input-border-radius);
-    padding: 1rem;
+    padding: 2rem;
     margin: 0;
     font-family: sans-serif;
     color: #67557e;
     flex-grow: 1;
+    min-height: 5rem;
 }
 
 .toolbar {
+    width: 100%;
+    margin-bottom: .5rem;
+}
+
+.message-list-container {
     width: 100%;
     margin-bottom: .5rem;
 }
@@ -71,10 +78,30 @@ body > .content {
     cursor: pointer;
 }
 
-.magic-input:focus {
+#send-button {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    border: none;
+    cursor: pointer;
+    background-color: var(--pink);
+    padding: .5rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.send-button-text {
+    background-color: #fff;
+    background-clip: text;
+    color: transparent;
+}
+
+#magic-input:focus {
     outline: none;
 }
 
-.magic-input::placeholder {
+#magic-input::placeholder {
     opacity: .5;
 }

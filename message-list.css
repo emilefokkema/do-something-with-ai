@@ -1,0 +1,38 @@
+:host {
+    width: 100%;
+}
+
+:root{
+    font-size: 16px;
+}
+
+@keyframes show-messages {
+    from {
+        padding: 0;
+    }
+    to {
+        padding: 1rem;
+    }
+}
+
+#container {
+    background-color: #eee;
+    border-radius: 2.5rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#container > sent-message:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+#container > received-ai-message:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+#container.nonempty {
+    animation-name: show-messages;
+    animation-duration: .3s;
+    padding: 1rem;
+}

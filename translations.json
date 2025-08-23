@@ -3,12 +3,12 @@
         "ai": "AI",
         "doSomethingWith": "do something with",
         "whatCanIDoForYou": "What can AI do for you?",
-        "helpWithQuestion": "Get help asking a question"
+        "helpWithQuestion": "Suggest something using AI"
     },
     "nl": {
         "ai": "AI",
         "doSomethingWith": "doe iets met",
         "whatCanIDoForYou": "Wat kan AI voor je doen?",
-        "helpWithQuestion": "Help met vraag stellen"
+        "helpWithQuestion": "Doe AI-suggestie"
     }
 }

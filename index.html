@@ -9,6 +9,10 @@
             <h2 class="magic" data-translation-text="{{doSomethingWith}}"></h2>
             <h1 class="magic" data-translation-text="✨  {{ai}}  ✨"></h1>
             
+            <div class="message-list-container">
+                <message-list id="message-list"></message-list>
+            </div>
+            
             <div class="toolbar">
                 <button id="help-question-button">
                     <span class="button-text" data-translation-text="✨ {{helpWithQuestion}}"></span>
@@ -16,11 +20,37 @@
             </div>
             <div class="magic-input-wrapper">
                 <textarea 
-                    class="magic-input"
+                    id="magic-input"
                     data-translation-placeholder="{{whatCanIDoForYou}}"
                     spellcheck="false"
                 ></textarea>
+                <button id="send-button">
+                    <span class="send-button-text">✨</span>
+                </button>
             </div>
         </div>
+        <template id="message-list-template">
+            <style>
+                @import 'message-list.css';
+            </style>
+            <div id="container">
+            </div>
+        </template>
+        <template id="received-ai-message-template">
+            <style>
+                @import 'received-ai-message.css';
+            </style>
+            <div class="container">
+                <p>hello</p>
+            </div>
+        </template>
+        <template id="sent-message-template">
+            <style>
+                @import 'sent-message.css';
+            </style>
+            <div id="container">
+                <p>hello</p>
+            </div>
+        </template>
     </body>
 </html>
