@@ -36,7 +36,7 @@ function translateText(value, translations){
 }
 
 async function getTranslations(){
-    const response = await fetch('/translations.json');
+    const response = await fetch('translations.json');
     const obj = await response.json();
     return obj[getLanguage()];
 }
