@@ -1,4 +1,4 @@
-.container {
+#container {
     display: flex;
     flex-direction: row-reverse;
 }
@@ -6,7 +6,7 @@
 #balloon {
     max-width: 75%;
     background-color: #dcd1ed;
-    border-radius: 1.5rem;
+    border-radius: 1.5rem 1.5rem 0 1.5rem;
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -19,4 +19,9 @@
 
 ai-button {
     margin-top: 1rem;
+    display: none;
+}
+
+#container.complete ai-button {
+    display: initial;
 }

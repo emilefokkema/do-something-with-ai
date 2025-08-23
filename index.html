@@ -2,10 +2,13 @@
 <html>
     <head>
         <link rel="stylesheet" href="index.css"/>
-        <script type="module" src="scripts/main.js" async></script>
+        <title>{{doSomethingWithAi}}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
     <body>
+        <div id="header">
+            <ai-button text="improvePageWithAi"></ai-button>
+        </div>
         <div class="content">
             <h2 class="magic" data-translation-text="{{doSomethingWith}}"></h2>
             <h1 class="magic" data-translation-text="✨  {{ai}}  ✨"></h1>
@@ -28,7 +31,9 @@
                 </button>
             </div>
         </div>
-        <div class="footer">&nbsp;</div>
+        <div class="footer">
+            <ai-button text="useAiToFindOutHowToAddAnotherAIButtonToThisPage"></ai-button>
+        </div>
         <template id="message-list-template">
             <link rel="stylesheet" href="message-list.css"/>
             <div id="container">
@@ -36,17 +41,20 @@
         </template>
         <template id="received-ai-message-template">
             <link rel="stylesheet" href="received-ai-message.css"/>
-            <div class="container">
+            <div id="container">
                 <div id="balloon">
                     <p id="content-container"></p>
+                    <ai-button text="improveAnswerWithAi"></ai-button>
                 </div>
-                
             </div>
         </template>
         <template id="sent-message-template">
             <link rel="stylesheet" href="sent-message.css"/>
-            <div id="container">
-                <div id="content-container"></div>
+            <div class="container">
+                <div class="balloon">
+                    <p id="content-container"></p>
+                    <ai-button text="improvePromptWithAi"></ai-button>
+                </div>
             </div>
         </template>
         <template id="ai-button-template">
@@ -55,5 +63,6 @@
                 <span id="button-text"></span>
             </button>
         </template>
+        <script type="module" src="scripts/main.js"></script>
     </body>
 </html>
