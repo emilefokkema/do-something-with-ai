@@ -15,7 +15,7 @@ function getTranslation(translations, key){
  * @param {HTMLElement} element 
  * @returns {Iterable<Element>}
  */
-function *findElementsWithTranslations(element){
+export function *findTranslatableElements(element){
     const xpe = new XPathEvaluator();
     const nsResolver = element.ownerDocument?.documentElement || element.documentElement;
     const iterator = xpe.evaluate('//*[./@*[starts-with(name(),"data-translation-")]]', element, nsResolver, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE);
@@ -45,22 +45,20 @@ async function getTranslations(){
  * @param {HTMLElement} element 
  * @param {object} translations
  */
-function insertTranslations(element, translations){
-    for(const elementWithTranslation of findElementsWithTranslations(element)){
-        for(const attrName of elementWithTranslation.getAttributeNames()){
-            const match = attrName.match(/^data-translation-(.*)$/);
-            if(!match){
-                continue;
-            }
-            const translationProperty = match[1];
-            const valueToTranslate = elementWithTranslation.getAttribute(attrName);
-            const translated = translateText(valueToTranslate, translations);
-            elementWithTranslation.removeAttribute(attrName);
-            if(translationProperty === 'text'){
-                elementWithTranslation.innerHTML = translated;
-            }else{
-                elementWithTranslation.setAttribute(translationProperty, translated)
-            }
+function insertTranslationsIntoTranslatableElement(element, translations){
+    for(const attrName of element.getAttributeNames()){
+        const match = attrName.match(/^data-translation-(.*)$/);
+        if(!match){
+            continue;
+        }
+        const translationProperty = match[1];
+        const valueToTranslate = element.getAttribute(attrName);
+        const translated = translateText(valueToTranslate, translations);
+        element.removeAttribute(attrName);
+        if(translationProperty === 'text'){
+            element.innerHTML = translated;
+        }else{
+            element.setAttribute(translationProperty, translated)
         }
     }
 }
@@ -89,9 +87,18 @@ class Translator {
      */
     async translateElement(element){
         const translations = await this.getTranslations();
-        insertTranslations(element, translations);
+        for(const elementWithTranslation of findTranslatableElements(element)){
+            insertTranslationsIntoTranslatableElement(elementWithTranslation, translations);
+        }
     }
 
+
+    async translateTranslatableElements(...elements){
+        const translations = await this.getTranslations();
+        for(const elementWithTranslation of elements){
+            insertTranslationsIntoTranslatableElement(elementWithTranslation, translations);
+        }
+    }
     /**
      * 
      * @param {string} text 

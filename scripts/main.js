@@ -26,8 +26,8 @@ sendButton.addEventListener('click', () => {
     magicInput.value = '';
 });
 
-addEventListener('translationrequested', (e) => {
-    translator.translateElement(e.detail)
+addEventListener('translationrequested', ({detail: {translatableElements}}) => {
+    translator.translateTranslatableElements(...translatableElements)
 })
 
 addEventListener('aibuttonclick', () => {
