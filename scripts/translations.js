@@ -15,7 +15,7 @@ function getTranslation(translations, key){
  * @param {HTMLElement} element 
  * @returns {Iterable<Element>}
  */
-export function *findTranslatableElements(element){
+function *findTranslatableElements(element){
     const xpe = new XPathEvaluator();
     const nsResolver = element.ownerDocument?.documentElement || element.documentElement;
     const iterator = xpe.evaluate('//*[./@*[starts-with(name(),"data-translation-")]]', element, nsResolver, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE);
@@ -113,4 +113,26 @@ class Translator {
     }
 }
 
-export const translator = new Translator();
+const translator = new Translator();
+
+async function translateTitle(){
+    document.title = await translator.translateText(document.title);
+}
+
+addEventListener('translatorrequested', ({detail: {callback}}) => {
+    callback(translator);
+});
+
+translator.translateElement(document.body);
+translateTitle();
+
+export function getTranslator(dispatchEvent, callback){
+    const event = new CustomEvent('translatorrequested', {
+        detail: {
+            callback
+        },
+        bubbles: true,
+        composed: true
+    });
+    dispatchEvent(event);
+}

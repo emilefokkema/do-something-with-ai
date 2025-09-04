@@ -1,11 +1,11 @@
-import { translator } from './translations.js'
+import './translations.js'
+import { getTranslator } from './translations.js'
 import { AiMessage } from './ai-message.js';
 import './message-list.js';
 import './received-ai-message.js'
 import './sent-message.js'
 import './ai-button.js'
 
-translator.translateElement(document.body);
 const messageList = document.getElementById('message-list');
 const sendButton = document.getElementById('send-button');
 const magicInput = document.getElementById('magic-input');
@@ -26,10 +26,6 @@ sendButton.addEventListener('click', () => {
     magicInput.value = '';
 });
 
-addEventListener('translationrequested', ({detail: {translatableElements}}) => {
-    translator.translateTranslatableElements(...translatableElements)
-})
-
 addEventListener('aibuttonclick', () => {
     letAiAnswer();
 })
@@ -43,14 +39,11 @@ function addAiButton(){
 async function letAiAnswer(){
     const answer = aiAnswerCount === 0 ? '{{iCannotHelpYou}}' : '{{seeEarlierAnswer}}';
     aiAnswerCount++;
-    const aiMessage = new AiMessage(await translator.translateText(answer));
-    messageList.addReceivedAiMessage(aiMessage);
-    aiMessage.start();
-    window.scrollTo(0, document.body.scrollHeight);
-}
+    getTranslator(dispatchEvent, async (translator) => {
+        const aiMessage = new AiMessage(await translator.translateText(answer));
+        messageList.addReceivedAiMessage(aiMessage);
+        aiMessage.start();
+        window.scrollTo(0, document.body.scrollHeight);
+    })
 
-async function translateTitle(){
-    document.title = await translator.translateText(document.title);
 }
-
-translateTitle();
