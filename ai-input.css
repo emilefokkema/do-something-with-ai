@@ -1,0 +1,53 @@
+:host {
+    --input-border-width: 2px;
+    --input-border-radius: 2.5rem;
+}
+
+.wrapper {
+    background-image: var(--gradient);
+    padding: var(--input-border-width);
+    border-radius: calc(var(--input-border-radius) + var(--input-border-width));
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+textarea {
+    border-width: 0;
+    border-radius: var(--input-border-radius);
+    padding: 2rem;
+    margin: 0;
+    font-family: sans-serif;
+    color: #67557e;
+    flex-grow: 1;
+    min-height: 5rem;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+textarea::placeholder {
+    opacity: .5;
+}
+
+button {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    border: none;
+    cursor: pointer;
+    background-color: var(--pink);
+    padding: .5rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+    font-size: 1.5rem;
+}
+
+button > span {
+    background-color: #fff;
+    background-clip: text;
+    color: transparent;
+}

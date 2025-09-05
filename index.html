@@ -13,23 +13,12 @@
             <h2 class="magic" data-translation-text="{{doSomethingWith}}"></h2>
             <h1 class="magic" data-translation-text="✨  {{ai}}  ✨"></h1>
             
-            <div class="message-list-container">
-                <message-list id="message-list"></message-list>
-            </div>
+            <message-list id="message-list"></message-list>
             
             <div class="toolbar">
                 <ai-button text="helpWithQuestion"></ai-button>
             </div>
-            <div class="magic-input-wrapper">
-                <textarea 
-                    id="magic-input"
-                    data-translation-placeholder="{{whatCanIDoForYou}}"
-                    spellcheck="false"
-                ></textarea>
-                <button id="send-button">
-                    <span class="send-button-text">✨</span>
-                </button>
-            </div>
+            <ai-input></ai-input>
         </div>
         <div class="footer">
             <ai-button text="useAiToFindOutHowToAddAnotherAIButtonToThisPage"></ai-button>
@@ -59,6 +48,18 @@
             <button>
                 <span id="button-text"></span>
             </button>
+        </template>
+        <template id="ai-input-template">
+            <link rel="stylesheet" href="ai-input.css"/>
+            <div class="wrapper">
+                <textarea
+                    data-translation-placeholder="{{whatCanIDoForYou}}"
+                    spellcheck="false"
+                ></textarea>
+                <button>
+                    <span>✨</span>
+                </button>
+            </div>
         </template>
         <script type="module" src="scripts/main.js"></script>
     </body>

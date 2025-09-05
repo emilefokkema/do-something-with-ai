@@ -26,6 +26,22 @@ function *findTranslatableElements(element){
 }
 
 /**
+ * @param {Node} node 
+ */
+function *findElementsInNode(node){
+    if(!node){
+        return;
+    }
+    if(node instanceof Element){
+        yield node;
+        return;
+    }
+    if(node instanceof DocumentFragment){
+        yield* node.children;
+    }
+}
+
+/**
  * 
  * @param {string} value 
  * @param {object} translations
@@ -83,22 +99,17 @@ class Translator {
     }
 
     /**
-     * @param {HTMLElement} element 
+     * @param {Node} node 
      */
-    async translateElement(element){
+    async translateNode(node){
         const translations = await this.getTranslations();
-        for(const elementWithTranslation of findTranslatableElements(element)){
-            insertTranslationsIntoTranslatableElement(elementWithTranslation, translations);
+        for(const element of findElementsInNode(node)){
+            for(const elementWithTranslation of findTranslatableElements(element)){
+                insertTranslationsIntoTranslatableElement(elementWithTranslation, translations);
+            }
         }
     }
 
-
-    async translateTranslatableElements(...elements){
-        const translations = await this.getTranslations();
-        for(const elementWithTranslation of elements){
-            insertTranslationsIntoTranslatableElement(elementWithTranslation, translations);
-        }
-    }
     /**
      * 
      * @param {string} text 
@@ -123,7 +134,7 @@ addEventListener('translatorrequested', ({detail: {callback}}) => {
     callback(translator);
 });
 
-translator.translateElement(document.body);
+translator.translateNode(document.body);
 translateTitle();
 
 export function getTranslator(dispatchEvent, callback){

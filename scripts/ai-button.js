@@ -20,9 +20,9 @@ export class AiButton extends HTMLElement {
                 const buttonText = content.querySelector('#button-text');
                 const text = this.getAttribute('text');
                 buttonText.setAttribute('data-translation-text', `✨ {{${text}}}`);
-                // since 'translateElement' uses xPaths, this has to be evaluated now, before
+                // since 'translateNode' uses xPaths, this has to be evaluated now, before
                 // content becomes part of the shadow DOM. See https://issues.chromium.org/issues/440874372
-                await translator.translateElement(buttonText);
+                await translator.translateNode(content);
                 resolve();
             })
         })

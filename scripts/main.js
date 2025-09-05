@@ -6,25 +6,20 @@ import './received-ai-message.js'
 import './sent-message.js'
 import './ai-button.js'
 import './message-list-message.js'
+import './ai-input.js'
 
 const messageList = document.getElementById('message-list');
-const sendButton = document.getElementById('send-button');
-const magicInput = document.getElementById('magic-input');
+const aiInput = document.querySelector('ai-input');
 const header = document.getElementById('header');
 let aiAnswerCount = 0;
 
-sendButton.addEventListener('click', () => {
-    const messageText = magicInput.value;
-    if(!messageText){
-        return;
-    }
-    if(messageText === '+'){
+aiInput.addEventListener('aiinputsent', ({detail: { value }}) => {
+    if(value === '+'){
         addAiButton();
     }else{
-        messageList.addSentMessage(messageText);
+        messageList.addSentMessage(value);
         letAiAnswer();
     }
-    magicInput.value = '';
 });
 
 addEventListener('aibuttonclick', () => {
