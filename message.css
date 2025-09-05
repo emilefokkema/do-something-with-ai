@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    flex-direction: row;
+}
+.container.answer {
+    flex-direction: row-reverse;
+}
+
+.balloon {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 1.5rem 1.5rem 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+}
+.container.answer .balloon {
+    max-width: 75%;
+    background-color: #dcd1ed;
+    border-radius: 1.5rem 1.5rem 0 1.5rem;
+}
+
+p {
+    margin: 0;
+}
+.container.answer p {
+    color: #5b417c;
+}
+
+ai-button {
+    margin-top: 1rem;
+    display: none;
+}
+
+.container.has-button ai-button {
+    display: initial;
+}

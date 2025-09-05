@@ -5,6 +5,7 @@ import './message-list.js';
 import './received-ai-message.js'
 import './sent-message.js'
 import './ai-button.js'
+import './message-list-message.js'
 
 const messageList = document.getElementById('message-list');
 const sendButton = document.getElementById('send-button');

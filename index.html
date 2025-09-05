@@ -39,23 +39,20 @@
             <div id="container">
             </div>
         </template>
-        <template id="received-ai-message-template">
-            <link rel="stylesheet" href="received-ai-message.css"/>
-            <div id="container">
-                <div id="balloon">
-                    <p id="content-container"></p>
-                    <ai-button text="improveAnswerWithAi"></ai-button>
+        <template id="message-template">
+            <link rel="stylesheet" href="message.css"/>
+            <div class="container">
+                <div class="balloon">
+                    <p></p>
+                    <ai-button></ai-button>
                 </div>
             </div>
         </template>
+        <template id="received-ai-message-template">
+            <message-list-message variant="answer"></message-list-message>
+        </template>
         <template id="sent-message-template">
-            <link rel="stylesheet" href="sent-message.css"/>
-            <div class="container">
-                <div class="balloon">
-                    <p id="content-container"></p>
-                    <ai-button text="improvePromptWithAi"></ai-button>
-                </div>
-            </div>
+            <message-list-message ai-button-text="improvePromptWithAi"></message-list-message>
         </template>
         <template id="ai-button-template">
             <link rel="stylesheet" href="ai-button.css"/>

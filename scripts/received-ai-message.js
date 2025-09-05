@@ -14,17 +14,17 @@ class ReceivedAiMessage extends HTMLElement {
     }
 
     setMessageContent(){
-        const contentContainer = this.shadow.querySelector('#content-container');
-        contentContainer.innerText = this.aiMessage.content;
-        if(this.aiMessage.loading){
-            contentContainer.appendChild(document.createTextNode('...'))
+        if(!this.aiMessage){
+            return;
         }
+        const messageElement = this.shadow.querySelector('message-list-message');
+        let text = this.aiMessage.content;
+        if(this.aiMessage.loading){
+            text = `${text}...`;
+        }
+        messageElement.setAttribute('text', text);
         if(this.aiMessage.complete){
-            const container = this.shadow.querySelector('#container');
-            container.classList.add('complete');
-            //const button = document.createElement('ai-button');
-            //button.setAttribute('text', 'improveAnswerWithAi');
-            //balloon.appendChild(button);
+            messageElement.setAttribute('ai-button-text', 'improveAnswerWithAi')
         }
     }
 
