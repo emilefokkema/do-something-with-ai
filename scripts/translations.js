@@ -119,8 +119,8 @@ class Translator {
         return translateText(text, translations);
     }
 
-    async getTranslations(){
-        return this.translations = this.translations || await getTranslations();
+    getTranslations(){
+        return this.translations = this.translations || getTranslations();
     }
 }
 
