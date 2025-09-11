@@ -147,3 +147,9 @@ export function getTranslator(dispatchEvent, callback){
     });
     dispatchEvent(event);
 }
+
+export function getTranslatorOnce(dispatchEvent){
+    return new Promise(res => {
+        getTranslator(dispatchEvent, res);
+    })
+}
