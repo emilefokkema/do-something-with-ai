@@ -127,7 +127,7 @@ class Translator {
 const translator = new Translator();
 
 async function translateTitle(){
-    document.title = await translator.translateText(document.title);
+    document.title = await translator.translateText('✨ {{doSomethingWithAi}}');
 }
 
 addEventListener('translatorrequested', ({detail: {callback}}) => {
