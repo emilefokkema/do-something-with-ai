@@ -7,15 +7,15 @@ export class AiButton extends HTMLElement {
         super();
         this.shadow = undefined;
         this.text = undefined;
-        this.removalRequestedListener = ({detail: {callback}}) => {
-            callback(this);
+        this.inventoryRequestedEventListener = ({detail: {reportAiButton}}) => {
+            reportAiButton(this);
         }
     }
     connectedCallback(){
         this.createAndAttachShadow();
     }
     disconnectedCallback(){
-        removeEventListener('aibuttonremovalrequested', this.removalRequestedListener)
+        removeEventListener('aibuttoninventoryrequested', this.inventoryRequestedEventListener)
     }
 
     async createAndAttachShadow(){
@@ -41,8 +41,9 @@ export class AiButton extends HTMLElement {
         this.shadow.querySelector('button').addEventListener('click', () => {
             const event = new CustomEvent('aibuttonclick', {bubbles: true, composed: true});
             this.dispatchEvent(event);
-        })
-        addEventListener('aibuttonremovalrequested', this.removalRequestedListener);
+        });
+        removeEventListener('aibuttoninventoryrequested', this.inventoryRequestedEventListener)
+        addEventListener('aibuttoninventoryrequested', this.inventoryRequestedEventListener);
     }
 
     attributeChangedCallback(){

@@ -1,9 +1,12 @@
 import { getTranslator } from "./translations.js";
+import { getAi } from './ai.js'
 
 class AiInput extends HTMLElement {
     constructor(){
         super();
         this.shadow = undefined;
+        this.aiMessage = undefined;
+        this.aiMessageContentUpdatedListener = () => this.setTextAreaValue();
     }
     async connectedCallback(){
         const template = document.getElementById('ai-input-template');
@@ -28,6 +31,27 @@ class AiInput extends HTMLElement {
 
         }, {capture: true});
         sendButton.addEventListener('click', () => this.sendValue())
+    }
+
+    async useAiSuggestion(){
+        const message = await (await getAi(e => this.dispatchEvent(e))).getMessage();
+        if(this.aiMessage){
+            this.aiMessage.removeEventListener('contentupdated', this.aiMessageContentUpdatedListener);
+        }
+        this.aiMessage = message;
+        message.addEventListener('contentupdated', this.aiMessageContentUpdatedListener)
+    }
+
+    setTextAreaValue(){
+        if(!this.aiMessage){
+            return;
+        }
+        const textArea = this.shadow.querySelector('textarea');
+        let text = this.aiMessage.content;
+        if(this.aiMessage.loading){
+            text = `${text}...`;
+        }
+        textArea.value = text;
     }
 
     sendValue(){

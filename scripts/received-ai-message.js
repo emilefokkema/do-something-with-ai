@@ -1,16 +1,30 @@
+import { getAi } from './ai.js'
+
 class ReceivedAiMessage extends HTMLElement {
     constructor(){
         super();
         this.shadow = undefined;
         this.aiMessage = undefined;
+        this.aiMessageContentUpdatedListener = () => this.setMessageContent();
     }
-    connectedCallback(){
+    async connectedCallback(){
         const template = document.getElementById('received-ai-message-template');
         const content = template.content.cloneNode(true);
         const shadow = this.attachShadow({mode: 'open'});
         shadow.appendChild(content);
         this.shadow = shadow;
-        this.setMessageContent();
+        await this.setAiMessage();
+        const messageElement = this.shadow.querySelector('message-list-message');
+        messageElement.addEventListener('aibuttonclick', () => this.setAiMessage());
+    }
+
+    async setAiMessage(){
+        const message = await (await getAi(e => this.dispatchEvent(e))).getMessage();
+        if(this.aiMessage){
+            this.aiMessage.removeEventListener('contentupdated', this.aiMessageContentUpdatedListener);
+        }
+        this.aiMessage = message;
+        message.addEventListener('contentupdated', this.aiMessageContentUpdatedListener)
     }
 
     setMessageContent(){
@@ -26,17 +40,6 @@ class ReceivedAiMessage extends HTMLElement {
         if(this.aiMessage.complete){
             messageElement.setAttribute('ai-button-text', 'improveAnswerWithAi')
         }
-    }
-
-    /**
-     * 
-     * @param {import('./ai-message.js').AiMessage} aiMessage 
-     */
-    setMessage(aiMessage){
-        this.aiMessage = aiMessage;
-        aiMessage.addEventListener('contentupdated', () => {
-            this.setMessageContent();
-        })
     }
 }
 

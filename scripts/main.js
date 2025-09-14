@@ -1,64 +1,56 @@
 import './translations.js'
-import { getTranslator } from './translations.js'
-import { AiMessage } from './ai-message.js';
 import './message-list.js';
 import './received-ai-message.js'
 import './sent-message.js'
 import './ai-button.js'
 import './message-list-message.js'
 import './ai-input.js'
+import './remaining-message.js'
 
 const messageList = document.getElementById('message-list');
 const aiInput = document.querySelector('ai-input');
-const header = document.getElementById('header');
-let aiAnswerCount = 0;
+const questionSuggestionAiButton = document.getElementById('helpWithQuestion');
+const improvePageWithAiButton = document.getElementById('improvePageWithAi');
+const hero = document.getElementById('hero')
 
 aiInput.addEventListener('aiinputsent', ({detail: { value }}) => {
-    if(value === '+'){
-        addAiButton();
-    }else if(value === '-'){
-        removeAiButton();
-    }else{
-        messageList.addSentMessage(value);
-        letAiAnswer();
-    }
+    messageList.addSentMessage(value);
+    messageList.addReceivedAiMessage();
+    window.scrollTo(0, document.body.scrollHeight);
 });
 
-addEventListener('aibuttonclick', () => {
-    letAiAnswer();
-})
+questionSuggestionAiButton.addEventListener('aibuttonclick', () => {
+    aiInput.useAiSuggestion();
+});
 
-function addAiButton(){
-    const button = document.createElement('ai-button');
-    button.setAttribute('text', 'anotherAiButton');
-    header.appendChild(button);
-}
-
-function removeAiButton(){
-    const aiButtons = [];
-    dispatchEvent(new CustomEvent(
-        'aibuttonremovalrequested',
-        {
-            detail: {
-                callback: (aiButton) => aiButtons.push(aiButton)
+improvePageWithAiButton.addEventListener('aibuttonclick', () => {
+    const otherAiButtons = [];
+    const customEvent = new CustomEvent('aibuttoninventoryrequested', {
+        detail: {
+            reportAiButton: (button) => {
+                if(button === improvePageWithAiButton){
+                    return;
+                }
+                otherAiButtons.push(button);
             }
         }
-    ));
-    if(aiButtons.length === 0){
+    });
+    dispatchEvent(customEvent);
+    if(otherAiButtons.length > 0){
+        otherAiButtons[Math.floor(Math.random() * otherAiButtons.length)].remove();
         return;
     }
-    const indexToRemove = Math.floor(Math.random() * aiButtons.length);
-    aiButtons[indexToRemove].remove();
-}
-
-async function letAiAnswer(){
-    const answer = aiAnswerCount === 0 ? '{{iCannotHelpYou}}' : '{{seeEarlierAnswer}}';
-    aiAnswerCount++;
-    getTranslator(dispatchEvent, async (translator) => {
-        const aiMessage = new AiMessage(await translator.translateText(answer));
-        messageList.addReceivedAiMessage(aiMessage);
-        aiMessage.start();
-        window.scrollTo(0, document.body.scrollHeight);
-    })
-
-}
+    if(aiInput.isConnected){
+        aiInput.remove();
+        return;
+    }
+    if(hero.isConnected){
+        hero.remove();
+        return;
+    }
+    improvePageWithAiButton.remove();
+    if(messageList.empty){
+        document.body.classList.remove('ai')
+        document.body.insertBefore(document.createElement('remaining-message'), document.body.firstElementChild)
+    }
+})

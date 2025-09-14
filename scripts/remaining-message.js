@@ -1,6 +1,6 @@
 import { getAi } from './ai.js'
 
-class SentMessage extends HTMLElement {
+class RemainingMessage extends HTMLElement{
     constructor(){
         super();
         this.shadow = undefined;
@@ -8,22 +8,16 @@ class SentMessage extends HTMLElement {
         this.aiMessageContentUpdatedListener = () => this.setMessageContent();
     }
     connectedCallback(){
-        const template = document.getElementById('sent-message-template');
+        const template = document.getElementById('remaining-message-template');
         const content = template.content.cloneNode(true);
         const shadow = this.attachShadow({mode: 'open'});
-        shadow.appendChild(content);
         this.shadow = shadow;
-        const message = this.getAttribute('content');
-        const messageListMessage = shadow.querySelector('message-list-message');
-        messageListMessage.setAttribute('text', message);
-        messageListMessage.addEventListener('aibuttonclick', () => this.improveWithAi());
+        shadow.appendChild(content);
+        this.setAiMessage();
     }
 
-    async improveWithAi(){
+    async setAiMessage(){
         const message = await (await getAi(e => this.dispatchEvent(e))).getMessage();
-        if(this.aiMessage){
-            this.aiMessage.removeEventListener('contentupdated', this.aiMessageContentUpdatedListener);
-        }
         this.aiMessage = message;
         message.addEventListener('contentupdated', this.aiMessageContentUpdatedListener)
     }
@@ -32,13 +26,13 @@ class SentMessage extends HTMLElement {
         if(!this.aiMessage){
             return;
         }
-        const messageListMessage = this.shadow.querySelector('message-list-message');
+        const spanElement = this.shadow.querySelector('span');
         let text = this.aiMessage.content;
         if(this.aiMessage.loading){
             text = `${text}...`;
         }
-        messageListMessage.setAttribute('text', text);
+        spanElement.innerText = text;
     }
 }
 
-customElements.define('sent-message', SentMessage)
+customElements.define('remaining-message', RemainingMessage)

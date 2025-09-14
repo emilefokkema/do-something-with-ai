@@ -5,23 +5,25 @@
         <title>{{doSomethingWithAi}}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
-    <body>
+    <body class="ai">
         <div id="header">
-            <ai-button text="improvePageWithAi"></ai-button>
+            <ai-button text="improvePageWithAi" id="improvePageWithAi"></ai-button>
         </div>
         <div class="content">
-            <h2 class="magic" data-translation-text="{{doSomethingWith}}"></h2>
-            <h1 class="magic" data-translation-text="✨  {{ai}}  ✨"></h1>
+            <div id="hero">
+                <h2 class="magic" data-translation-text="{{doSomethingWith}}"></h2>
+                <h1 class="magic" data-translation-text="✨  {{ai}}  ✨"></h1>
+            </div>
             
             <message-list id="message-list"></message-list>
             
             <div class="toolbar">
-                <ai-button text="helpWithQuestion"></ai-button>
+                <ai-button text="helpWithQuestion" id="helpWithQuestion"></ai-button>
             </div>
             <ai-input></ai-input>
         </div>
         <div class="footer">
-            <ai-button text="useAiToFindOutHowToAddAnotherAIButtonToThisPage"></ai-button>
+            
         </div>
         <template id="message-list-template">
             <link rel="stylesheet" href="message-list.css"/>
@@ -60,6 +62,10 @@
                     <span>✨</span>
                 </button>
             </div>
+        </template>
+        <template id="remaining-message-template">
+            <link rel="stylesheet" href="remaining-message.css"/>
+            <span></span>
         </template>
         <script type="module" src="scripts/main.js"></script>
     </body>
